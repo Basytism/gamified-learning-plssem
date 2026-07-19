@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamified Learning & Student Engagement — PLS-SEM Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EAECE3;
+    --paper-raised:#F4F5EF;
+    --ink:#1E2420;
+    --ink-soft:#5B6058;
+    --teal:#2E5C57;
+    --teal-deep:#1D3B38;
+    --amber:#C17A2E;
+    --line:#C4C7BA;
+    --sage:#DCE2D6;
+    --white:#FBFBF8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.01em;margin:0;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--teal);display:inline-block;}
+  a{color:inherit;}
+
+  /* ===== HEADER ===== */
+  header{border-bottom:1px solid var(--line);}
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);
+  }
+  .topbar strong{color:var(--ink);}
+
+  /* ===== HERO ===== */
+  .hero{padding:56px 0 64px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;}
+  .hero h1{font-size:44px;line-height:1.08;margin:18px 0 20px;}
+  .hero p.lede{font-size:16.5px;color:var(--ink-soft);max-width:46ch;}
+  .stat-row{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;}
+  .stat{font-family:'IBM Plex Mono',monospace;}
+  .stat .num{font-size:22px;color:var(--teal-deep);display:block;}
+  .stat .lbl{font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;}
+
+  /* ===== PATH DIAGRAM (signature element) ===== */
+  .diagram-card{
+    background:var(--white);border:1px solid var(--line);border-radius:2px;
+    padding:22px 20px 16px;
+  }
+  .diagram-caption{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);
+    display:flex;justify-content:space-between;margin-top:10px;padding-top:12px;border-top:1px solid var(--line);}
+  svg text{font-family:'IBM Plex Mono',monospace;}
+  .node-label{font-size:11.5px;font-weight:500;fill:var(--ink);}
+  .path-coef{font-size:10.5px;fill:var(--teal-deep);}
+  .r2-tag{font-size:9.5px;fill:var(--white);}
+
+  /* ===== SECTIONS ===== */
+  section{padding:52px 0;border-top:1px solid var(--line);}
+  .section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:30px;flex-wrap:wrap;gap:10px;}
+  .section-head h2{font-size:26px;}
+  .section-note{font-size:13px;color:var(--ink-soft);max-width:38ch;text-align:right;}
+
+  /* skills grid */
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .grid-4 .cell{background:var(--paper-raised);padding:22px 18px;}
+  .cell h3{font-size:15px;margin-bottom:8px;}
+  .cell p{font-size:13px;color:var(--ink-soft);margin:0;}
+  .cell .tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;}
+
+  /* methodology */
+  .method-list{display:flex;flex-direction:column;}
+  .method-step{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line);}
+  .method-step:last-child{border-bottom:none;}
+  .method-step .idx{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:14px;padding-top:2px;}
+  .method-step h3{font-size:15.5px;margin-bottom:4px;}
+  .method-step p{margin:0;font-size:13.5px;color:var(--ink-soft);}
+
+  /* IPMA quadrant */
+  .ipma-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;}
+  .ipma-legend{font-size:13.5px;color:var(--ink-soft);}
+  .ipma-legend .flag{
+    display:inline-block;background:var(--amber);color:var(--white);font-family:'IBM Plex Mono',monospace;
+    font-size:10px;padding:2px 6px;border-radius:2px;margin-right:6px;
+  }
+  .quad-note{margin:0 0 14px;padding-left:14px;border-left:2px solid var(--line);}
+  .quad-note.priority{border-left-color:var(--amber);}
+
+  /* repo tree */
+  .tree{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;background:var(--teal-deep);color:#DCE7E1;
+    padding:26px 30px;border-radius:2px;line-height:1.9;
+  }
+  .tree .c{color:#8FB6AE;}
+  .tree .f{color:#F0D9B5;}
+
+  /* findings */
+  .findings{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .finding{background:var(--paper-raised);border:1px solid var(--line);padding:20px;}
+  .finding .k{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:8px;}
+  .finding p{margin:0;font-size:14px;}
+  .finding.priority{border-color:var(--amber);}
+  .finding.priority .k{color:var(--amber);}
+
+  /* data dictionary table */
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;
+    text-align:left;color:var(--ink-soft);border-bottom:1px solid var(--ink);padding:8px 12px;
+  }
+  td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tr:hover td{background:var(--paper-raised);}
+  .type-reflective{color:var(--teal-deep);font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
+  .type-formative{color:var(--amber);font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
+
+  footer{padding:40px 0 60px;font-size:12.5px;color:var(--ink-soft);}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);padding-top:22px;}
+
+  @media (max-width:840px){
+    .hero-grid,.ipma-wrap{grid-template-columns:1fr;}
+    .grid-4{grid-template-columns:1fr 1fr;}
+    .findings{grid-template-columns:1fr;}
+    .hero h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topbar">
+    <span><strong>Code Counsel Research Series</strong> · Portfolio 01</span>
+    <span>SmartPLS 4.x · N = 200 · Bootstrap 5,000</span>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">PLS-SEM Case Study</span>
+      <h1>Does gamification actually teach anything?</h1>
+      <p class="lede">A structural model tracing intrinsic motivation through engagement to learning outcomes — and which game mechanics are worth an institution's investment.</p>
+      <div class="stat-row">
+        <div class="stat"><span class="num">R² .58</span><span class="lbl">Learning Outcomes</span></div>
+        <div class="stat"><span class="num">HTMT ✓</span><span class="lbl">Discriminant Validity</span></div>
+        <div class="stat"><span class="num">Q² &gt; 0</span><span class="lbl">Predictive Relevance</span></div>
+      </div>
+    </div>
+    <div class="diagram-card">
+      <svg viewBox="0 0 420 260" width="100%">
+        <!-- GE -->
+        <rect x="10" y="112" width="88" height="40" fill="#F4F5EF" stroke="#2E5C57" stroke-width="1.4"/>
+        <text x="54" y="128" text-anchor="middle" class="node-label">Gamification</text>
+        <text x="54" y="142" text-anchor="middle" class="node-label">Elements</text>
+        <!-- IM -->
+        <rect x="10" y="18" width="88" height="40" fill="#F4F5EF" stroke="#2E5C57" stroke-width="1.4"/>
+        <text x="54" y="34" text-anchor="middle" class="node-label">Intrinsic</text>
+        <text x="54" y="48" text-anchor="middle" class="node-label">Motivation</text>
+        <!-- ENG -->
+        <rect x="168" y="65" width="88" height="40" fill="#2E5C57"/>
+        <text x="212" y="81" text-anchor="middle" class="node-label" fill="#FBFBF8">Engagement</text>
+        <rect x="220" y="97" width="34" height="14" fill="#C17A2E"/>
+        <text x="237" y="107" text-anchor="middle" class="r2-tag">R² .46</text>
+        <!-- LO -->
+        <rect x="322" y="112" width="88" height="40" fill="#1D3B38"/>
+        <text x="366" y="128" text-anchor="middle" class="node-label" fill="#FBFBF8">Learning</text>
+        <text x="366" y="142" text-anchor="middle" class="node-label" fill="#FBFBF8">Outcomes</text>
+        <rect x="366" y="153" width="34" height="14" fill="#C17A2E"/>
+        <text x="383" y="163" text-anchor="middle" class="r2-tag">R² .58</text>
+
+        <!-- arrows -->
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#1E2420"/>
+          </marker>
+        </defs>
+        <line x1="98" y1="38" x2="168" y2="80" stroke="#1E2420" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="118" y="55" class="path-coef">β .41</text>
+        <line x1="98" y1="132" x2="168" y2="95" stroke="#1E2420" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <text x="118" y="128" class="path-coef">β .33</text>
+        <line x1="256" y1="90" x2="322" y2="126" stroke="#1E2420" stroke-width="1.6" marker-end="url(#arrow)"/>
+        <text x="270" y="112" class="path-coef">β .52</text>
+      </svg>
+      <div class="diagram-caption">
+        <span>Inner model — path weighting scheme</span>
+        <span>bootstrapped, two-tailed, p &lt; .05</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Skills demonstrated</h2>
+      <p class="section-note">Reflective and formative model specification through to advanced post-hoc analysis.</p>
+    </div>
+    <div class="grid-4">
+      <div class="cell"><span class="tag">Measurement</span><h3>Reliability &amp; validity</h3><p>Indicator loadings, Composite Reliability, AVE for convergent validity.</p></div>
+      <div class="cell"><span class="tag">Measurement</span><h3>Discriminant validity</h3><p>HTMT and Fornell-Larcker criterion, cross-checked against each other.</p></div>
+      <div class="cell"><span class="tag">Structural</span><h3>Path significance</h3><p>Bootstrapped coefficients, R² and f² effect sizes across the inner model.</p></div>
+      <div class="cell"><span class="tag">Advanced</span><h3>IPMA</h3><p>Importance-performance mapping to prioritize which mechanics to build next.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Methodology</h2>
+      <p class="section-note">A four-stage workflow from raw survey data to a prioritized recommendation.</p>
+    </div>
+    <div class="method-list">
+      <div class="method-step"><span class="idx">01</span><div><h3>Data cleaning</h3><p>Normality checks and pre-processing performed in R on the raw survey export.</p></div></div>
+      <div class="method-step"><span class="idx">02</span><div><h3>Model building</h3><p>Reflective constructs (motivation, engagement, outcomes) and a formative construct (gamification elements) configured as a path diagram in SmartPLS.</p></div></div>
+      <div class="method-step"><span class="idx">03</span><div><h3>Validation</h3><p>Bootstrapping (N = 5,000) for path significance; Blindfolding (D = 7) for predictive relevance.</p></div></div>
+      <div class="method-step"><span class="idx">04</span><div><h3>Post-hoc analysis</h3><p>IPMA run on the structural model to separate what matters from what's merely visible.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Importance–performance map</h2>
+      <p class="section-note">Where should the next design sprint actually go?</p>
+    </div>
+    <div class="ipma-wrap">
+      <svg viewBox="0 0 380 320" width="100%">
+        <rect x="0" y="0" width="380" height="320" fill="#F4F5EF" stroke="#C4C7BA"/>
+        <line x1="190" y1="0" x2="190" y2="320" stroke="#C4C7BA"/>
+        <line x1="0" y1="160" x2="380" y2="160" stroke="#C4C7BA"/>
+        <text x="10" y="20" class="path-coef" fill="#C17A2E" font-weight="600">PRIORITIZE</text>
+        <text x="290" y="20" class="path-coef" fill="#5B6058">MAINTAIN</text>
+        <text x="10" y="310" class="path-coef" fill="#5B6058">LOW PRIORITY</text>
+        <text x="270" y="310" class="path-coef" fill="#5B6058">OVER-INVESTED</text>
+
+        <!-- Feedback Speed: high importance, low performance -->
+        <circle cx="95" cy="55" r="7" fill="#C17A2E"/>
+        <text x="108" y="59" class="node-label">Feedback Speed</text>
+        <!-- Badges: mid/mid -->
+        <circle cx="175" cy="150" r="7" fill="#2E5C57"/>
+        <text x="188" y="154" class="node-label">Badges</text>
+        <!-- Leaderboards: low importance, high performance -->
+        <circle cx="300" cy="250" r="7" fill="#2E5C57"/>
+        <text x="240" y="270" class="node-label">Leaderboards</text>
+
+        <text x="150" y="316" class="path-coef" fill="#5B6058">performance →</text>
+        <text x="6" y="160" class="path-coef" fill="#5B6058" transform="rotate(-90 6 160)">importance →</text>
+      </svg>
+      <div class="ipma-legend">
+        <p class="quad-note priority"><span class="flag">flagged</span>Feedback Speed sits highest on importance and lowest on performance — the clearest opportunity for intervention.</p>
+        <p class="quad-note">Leaderboards are highly visible to students but contribute little to learning outcomes — a candidate for de-prioritization.</p>
+        <p class="quad-note">Badges sit in the middle on both axes, contributing modestly without dominating either dimension.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Key findings</h2>
+    </div>
+    <div class="findings">
+      <div class="finding"><span class="k">Motivation → Engagement</span><p>Intrinsic motivation is a strong, significant predictor of engagement (β = .41, p &lt; .05).</p></div>
+      <div class="finding"><span class="k">Engagement → Outcomes</span><p>Engagement is the strongest driver in the model (β = .52), mediating nearly all downstream effect on learning outcomes.</p></div>
+      <div class="finding priority"><span class="k">Priority signal</span><p>Feedback speed shows high importance and low performance — the single highest-leverage fix available.</p></div>
+      <div class="finding"><span class="k">Over-invested signal</span><p>Leaderboards are visible but low-impact; competitive display elements are not where learning actually happens.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Repository structure</h2>
+    </div>
+    <div class="tree">
+<span class="c">/data</span>          <span class="f">synthetic-survey.csv</span>     <span class="c"># 200 synthetic respondents</span><br>
+<span class="c">/notebooks</span>     <span class="f">01_cleaning.R</span>            <span class="c"># descriptive stats, normality</span><br>
+<span class="c">/docs</span>          <span class="f">full-report.pdf</span>          <span class="c"># model validation + implications</span><br>
+<span class="c">/images</span>        <span class="f">path-model.png</span>, <span class="f">ipma.png</span><br>
+<span class="f">README.md</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="f">analysis_summary.md</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="f">data_dictionary.md</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Data dictionary (excerpt)</h2>
+      <p class="section-note">Full table in <em>data_dictionary.md</em>.</p>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Variable</th><th>Description</th><th>Type</th><th>Scale</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>IM1–IM4</td><td>Intrinsic motivation indicators</td><td class="type-reflective">Reflective</td><td>5-pt Likert</td></tr>
+        <tr><td>GE_FeedbackSpeed</td><td>Perceived speed of feedback after an activity</td><td class="type-formative">Formative</td><td>5-pt Likert</td></tr>
+        <tr><td>GE_Leaderboard</td><td>Perceived presence/visibility of rankings</td><td class="type-formative">Formative</td><td>5-pt Likert</td></tr>
+        <tr><td>ENG1–ENG4</td><td>Engagement indicators (time-on-task, attention)</td><td class="type-reflective">Reflective</td><td>5-pt Likert</td></tr>
+        <tr><td>LO1–LO3</td><td>Learning outcome indicators (mastery, retention)</td><td class="type-reflective">Reflective</td><td>Likert / 0-100</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>SmartPLS 4.x — path weighting scheme — bootstrapping N = 5,000 — blindfolding D = 7</span>
+    <span>Synthetic dataset — no PII — reproducible in R</span>
+  </div>
+</footer>
+
+</body>
+</html>
